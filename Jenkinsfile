@@ -62,5 +62,20 @@ pipeline{
                 }
            }
         }
+        stage('Deploying application on k8s cluster') {
+            
+             sh 'helm upgrade --install --set image.repository="34.173.168.113:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
+        }
     }
+    stage('verifying app deployment'){
+          sh 'kubectl run curl --image=curlimages/curl -i --rm --restart=Never -- curl myjavaapp-myapp:8080'
+       }
+       post {
+		always {
+			mail bcc: '', body: "<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "${currentBuild.result} CI: Project name -> ${env.JOB_NAME}", to: "dtestmail71@gmail.com";  
+		 }
+	   }
 }
+    
+    
+
