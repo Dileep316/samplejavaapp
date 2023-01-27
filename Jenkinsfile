@@ -65,7 +65,7 @@ pipeline{
         stage('Deploying application on k8s cluster') {
             steps {
                  dir('kubernetes/') {
-                    sh 'helm upgrade --install --set image.repository="http://34.172.71.178:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ '
+                    sh 'helm upgrade --install --set image.repository="34.172.71.178:8083/repository/docker-hosted/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ '
                  }
                 
             }
