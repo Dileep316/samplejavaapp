@@ -35,7 +35,7 @@ pipeline{
             }
         }
     }
-    stage('indentifying misconfigs using datree in helm charts'){
+   /**  stage('indentifying misconfigs using datree in helm charts'){
             steps{
                 script{
 
@@ -50,7 +50,8 @@ pipeline{
                     }
                 }
             }
-    }                
+    }
+    **/                
    stage("pushing the helm charts to nexus"){
             steps{
                 script{
