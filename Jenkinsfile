@@ -40,6 +40,7 @@ pipeline{
                 script{
                     dir('kubernetes/') {
                         withEnv(['DATREE_TOKEN=ba2cdd8b-8659-4874-b045-ee5c80edf39e']) {
+                           
                             sh 'helm datree test myapp/'
                         }
                         
@@ -76,7 +77,7 @@ pipeline{
         stage('Deploying application on k8s cluster') {
             steps {
                  dir('kubernetes/') {
-                    sh 'helm upgrade --install --set image.repository="34.134.252.135:8083/springapp " --set image.tag="${VERSION} " myjavaapp myapp/ '
+                    sh 'helm upgrade --install --set image.repository="34.134.252.135:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ '
                  }
                 
             }
